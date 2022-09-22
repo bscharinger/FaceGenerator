@@ -48,5 +48,6 @@ gan.compile(d_optimizer=d_optimizer, g_optimizer=g_optimizer,
             g_loss_func=generator_loss, d_loss_func=discriminator_loss)
 
 history = gan.fit(dataset, epochs=epochs,
-                  callbacks=[callbacks.GANcallbacks(10, 128),
-                             keras.callbacks.ModelCheckpoint("face_gen_network.h5", verbose=1)])
+                  callbacks=[callbacks.GANcallbacks(10, 128)])
+
+gan.save('GAN_FaceGen_model_30epochs')
