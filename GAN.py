@@ -9,7 +9,9 @@ class GAN(keras.Model):
         self.generator = generator
         self.noise_dim = noise_dim
         self.disc_extra_steps = disc_extra_steps
-        self.gp_weight=gp_weight
+        self.gp_weight = gp_weight
+        self.built = True
+
 
     def compile(self, d_optimizer, g_optimizer, d_loss_func, g_loss_func):
         super(GAN, self).compile()
@@ -38,6 +40,11 @@ class GAN(keras.Model):
     def metrics(self):
         return [self.d_loss_metric, self.g_loss_metric]
 
+    @classmethod
+    def from_config(cls, config):
+        return cls(**config)
+
+    @tf.function
     def train_step(self, real_images):
         # Sample noise data
         batch_size = tf.shape(real_images)[0]

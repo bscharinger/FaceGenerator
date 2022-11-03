@@ -32,5 +32,6 @@ def get_model(img_size):
     flat = layers.Flatten()(conv4)
     drop3 = layers.Dropout(0.2)(flat)
     outputs = layers.Dense(1, activation='linear')(drop3)
-    model = Model(inputs, outputs)
+
+    model = keras.models.Model(inputs, outputs)
     return model

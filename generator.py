@@ -38,5 +38,5 @@ def get_model(noise_size):
 
     outputs = layers.Activation('tanh')(bn5)
 
-    model = Model(inputs, outputs)
+    model = keras.models.Model(inputs, outputs)
     return model

@@ -26,8 +26,8 @@ generator_mod = generator.get_model(256)
 discriminator_mod.summary()
 generator_mod.summary()
 
-d_optimizer = keras.optimizers.Adam(learning_rate=0.0002, beta_1=0.5, beta_2=0.9, clipvalue=1)
-g_optimizer = keras.optimizers.Adam(learning_rate=0.0002, beta_1=0.5, beta_2=0.9)
+d_optimizer = keras.optimizers.Adam(learning_rate=0.0001, beta_1=0.0, beta_2=0.9)
+g_optimizer = keras.optimizers.Adam(learning_rate=0.0001, beta_1=0.0, beta_2=0.9)
 
 
 def discriminator_loss(real_img, fake_img):
@@ -40,15 +40,20 @@ def generator_loss(fake_img):
     return -tf.reduce_mean(fake_img)
 
 
-epochs = 30
+epochs = 5
 
 
-gan = GAN.GAN(discriminator_mod, generator_mod, 256, disc_extra_steps=1)
+gan = GAN.GAN(discriminator_mod, generator_mod, 256, disc_extra_steps=5)
 gan.compile(d_optimizer=d_optimizer, g_optimizer=g_optimizer,
             g_loss_func=generator_loss, d_loss_func=discriminator_loss)
+
+save_path = "./models"
+
+checkpoint = tf.train.Checkpoint(model=gan)
+#checkpoint.restore(tf.train.latest_checkpoint(save_path)).assert_consumed()
 
 history = gan.fit(dataset, epochs=epochs,
                   callbacks=[callbacks.GANcallbacks(10, 256),
                              keras.callbacks.TensorBoard(log_dir="./logs", update_freq='batch')])
 
-gan.save('GAN_FaceGen_model_30epochs')
+checkpoint.save(save_path)
