@@ -5,7 +5,7 @@ This is a work in progress.
 
 At the moment I am fighting with fine tuning to avoid mode collapse. 
 
-Some predictions so far:
+Some generations so far:
 
 ![generated_img_004_3](https://user-images.githubusercontent.com/105383316/199741613-127cee03-823e-481c-9192-abc42eaa12c7.png)
 ![generated_img_004_4](https://user-images.githubusercontent.com/105383316/199741634-16bc1ca3-6202-47bd-9990-90b34fef34a8.png)
