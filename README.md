@@ -3,7 +3,7 @@ A face generator using a GP-WGAN and the CelebA-Dataset.
 
 This is a work in progress. 
 
-At the moment I am fighting with fine tuning to avoid mode collapse. 
+At the moment I am working on fine tuning to avoid mode collapse. 
 
 Some generations so far:
 
